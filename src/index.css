@@ -24,11 +24,42 @@ code {
   width: 100%;
   max-width: 500px;
   margin: 2rem auto;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.context-wrapper li {
+  padding: 15px;
 }
 
 .context-menu {
   position: absolute;
   padding: 15px;
-  border: solid 1px red;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: solid 1px green;
+  border-radius: 5px;
+}
+
+.btn {
+  border: unset;
+  background: unset;
+  padding: 10px 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  display: block;
+}
+
+.btn-primary {
+  border: solid 1px green;
+  border-radius: 5px;
+}
+
+.btn-primary:hover {
+  background-color: rgb(22, 118, 22);
+  color: white;
 }

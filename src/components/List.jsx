@@ -16,7 +16,6 @@ const List = () => {
         setCotextBlock(true);
         setContextText(e.path[0].innerText);
         setAnchor({ x: e.pageX, y: e.pageY });
-        console.log(anchor);
       }
     };
     document.addEventListener("contextmenu", handleRightClick);
@@ -27,12 +26,15 @@ const List = () => {
     const removeContext = (e) => {
       if (!ulRef.current.contains(e.target)) {
         setCotextBlock(false);
-        console.log("outside");
       }
     };
 
     document.addEventListener("contextmenu", removeContext);
-    return () => document.removeEventListener("contextmenu", removeContext);
+    document.addEventListener("click", removeContext);
+    return () => {
+      document.removeEventListener("contextmenu", removeContext);
+      document.removeEventListener("click", removeContext);
+    };
   }, []);
   return (
     <>
@@ -41,7 +43,13 @@ const List = () => {
           <ListItem key={item.id} {...item} />
         ))}
       </ul>
-      {contextBlock && <ContextMenu text={contextText} position={anchor} />}
+      {contextBlock && (
+        <ContextMenu
+          text={contextText}
+          position={anchor}
+          closeContext={setCotextBlock}
+        />
+      )}
     </>
   );
 };
