@@ -5,6 +5,7 @@ import ListItem from "./ListItem";
 
 const List = () => {
   const ulRef = useRef();
+  const [anchor, setAnchor] = useState({ x: 0, y: 0 });
   const [contextBlock, setCotextBlock] = useState(false);
   const [contextText, setContextText] = useState("");
 
@@ -14,7 +15,8 @@ const List = () => {
         e.preventDefault();
         setCotextBlock(true);
         setContextText(e.path[0].innerText);
-        console.log(e.pageX, e.pageY);
+        setAnchor({ x: e.pageX, y: e.pageY });
+        console.log(anchor);
       }
     };
     document.addEventListener("contextmenu", handleRightClick);
@@ -34,12 +36,12 @@ const List = () => {
   }, []);
   return (
     <>
-      <ul ref={ulRef}>
+      <ul ref={ulRef} className="context-wrapper">
         {data.map((item) => (
           <ListItem key={item.id} {...item} />
         ))}
       </ul>
-      {contextBlock && <ContextMenu text={contextText} />}
+      {contextBlock && <ContextMenu text={contextText} position={anchor} />}
     </>
   );
 };
