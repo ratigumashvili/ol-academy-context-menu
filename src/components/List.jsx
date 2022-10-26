@@ -1,41 +1,13 @@
-import { useRef, useEffect, useState } from "react";
 import { data } from "../data";
+import { useRef } from "react";
 import ContextMenu from "./ContextMenu";
+import useContextMenu from "../helpers/useContextMenu";
 import ListItem from "./ListItem";
 
 const List = () => {
   const ulRef = useRef();
-  const [anchor, setAnchor] = useState({ x: 0, y: 0 });
-  const [contextBlock, setContextBlock] = useState(false);
-  const [contextText, setContextText] = useState("");
-
-  useEffect(() => {
-    const handleRightClick = (e) => {
-      if (ulRef.current.contains(e.target)) {
-        e.preventDefault();
-        setContextBlock(true);
-        setContextText(e.path[0].innerText);
-        setAnchor({ x: e.pageX, y: e.pageY });
-      }
-    };
-    document.addEventListener("contextmenu", handleRightClick);
-    return () => document.removeEventListener("contextmenu", handleRightClick);
-  });
-
-  useEffect(() => {
-    const removeContext = (e) => {
-      if (!ulRef.current.contains(e.target)) {
-        setContextBlock(false);
-      }
-    };
-
-    document.addEventListener("contextmenu", removeContext);
-    document.addEventListener("click", removeContext);
-    return () => {
-      document.removeEventListener("contextmenu", removeContext);
-      document.removeEventListener("click", removeContext);
-    };
-  }, []);
+  const { anchor, contextBlock, setContextBlock, contextText } =
+    useContextMenu(ulRef);
   return (
     <>
       <ul ref={ulRef} className="context-wrapper">
