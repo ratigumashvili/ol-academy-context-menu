@@ -6,8 +6,7 @@ import ListItem from "./ListItem";
 
 const List = () => {
   const ulRef = useRef();
-  const { anchor, contextBlock, setContextBlock, contextText } =
-    useContextMenu(ulRef);
+  const { anchor, contextBlock, contextText } = useContextMenu(ulRef);
   return (
     <>
       <ul ref={ulRef} className="context-wrapper">
@@ -16,11 +15,7 @@ const List = () => {
         ))}
       </ul>
       {contextBlock && (
-        <ContextMenu
-          text={contextText}
-          position={anchor}
-          closeContext={setContextBlock}
-        />
+        <ContextMenu contextText={contextText} anchor={anchor} />
       )}
     </>
   );

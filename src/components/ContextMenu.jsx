@@ -1,12 +1,10 @@
-import React from "react";
-
-const ContextMenu = ({ text, position }) => {
+const ContextMenu = ({ contextText, anchor }) => {
   return (
     <div
       className="context-menu"
-      style={{ top: `${position.y}px`, left: `${position.x}px` }}
+      style={{ top: `${anchor.y}px`, left: `${anchor.x}px` }}
     >
-      {text}
+      {contextText}
       <button className="btn btn-primary" value="Edit">
         Edit
       </button>

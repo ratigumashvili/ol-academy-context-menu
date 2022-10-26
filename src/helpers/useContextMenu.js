@@ -21,8 +21,8 @@ const useContextMenu = (ref) => {
   useEffect(() => {
     const removeContext = (e) => {
       if (!ref.current.contains(e.target)) {
-        setContextBlock(false);
         e.target.value && console.log(e.target.value);
+        setContextBlock(false);
       }
     };
 
@@ -37,7 +37,6 @@ const useContextMenu = (ref) => {
   return {
     anchor,
     contextBlock,
-    setContextBlock,
     contextText,
   };
 };
