@@ -6,14 +6,14 @@ import ListItem from "./ListItem";
 const List = () => {
   const ulRef = useRef();
   const [anchor, setAnchor] = useState({ x: 0, y: 0 });
-  const [contextBlock, setCotextBlock] = useState(false);
+  const [contextBlock, setContextBlock] = useState(false);
   const [contextText, setContextText] = useState("");
 
   useEffect(() => {
     const handleRightClick = (e) => {
       if (ulRef.current.contains(e.target)) {
         e.preventDefault();
-        setCotextBlock(true);
+        setContextBlock(true);
         setContextText(e.path[0].innerText);
         setAnchor({ x: e.pageX, y: e.pageY });
       }
@@ -25,7 +25,7 @@ const List = () => {
   useEffect(() => {
     const removeContext = (e) => {
       if (!ulRef.current.contains(e.target)) {
-        setCotextBlock(false);
+        setContextBlock(false);
       }
     };
 
@@ -47,7 +47,7 @@ const List = () => {
         <ContextMenu
           text={contextText}
           position={anchor}
-          closeContext={setCotextBlock}
+          closeContext={setContextBlock}
         />
       )}
     </>
