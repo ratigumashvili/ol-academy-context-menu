@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useContextMenu = (ref) => {
+const useContextMenu = (ref, ref2) => {
   const [anchor, setAnchor] = useState({ x: 0, y: 0 });
   const [contextBlock, setContextBlock] = useState(false);
   const [contextText, setContextText] = useState("");
@@ -20,8 +20,11 @@ const useContextMenu = (ref) => {
 
   useEffect(() => {
     const removeContext = (e) => {
+      if (ref2.current && ref2.current.contains(e.target)) {
+        return;
+      }
       if (!ref.current.contains(e.target)) {
-        e.target.value && console.log(e.target.value);
+        // e.target.value && console.log(e.target.value, contextText);
         setContextBlock(false);
       }
     };
@@ -32,12 +35,13 @@ const useContextMenu = (ref) => {
       document.removeEventListener("contextmenu", removeContext);
       document.removeEventListener("click", removeContext);
     };
-  }, [ref]);
+  }, [ref, ref2, contextText]);
 
   return {
     anchor,
     contextBlock,
     contextText,
+    setContextBlock,
   };
 };
 
