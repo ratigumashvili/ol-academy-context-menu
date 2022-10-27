@@ -35,7 +35,7 @@ const useContextMenu = (ref, ref2) => {
       document.removeEventListener("contextmenu", removeContext);
       document.removeEventListener("click", removeContext);
     };
-  }, [ref, ref2, contextText]);
+  }, [ref, ref2]);
 
   return {
     anchor,
