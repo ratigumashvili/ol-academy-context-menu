@@ -17,7 +17,7 @@ const ContextMenu = ({ contextText, anchor, menuRef, setContextBlock }) => {
         Edit
       </button>
       <button
-        className="btn btn-primary"
+        className="btn btn-danger"
         value="Remove"
         onClick={(e) => {
           setContextBlock(false);
